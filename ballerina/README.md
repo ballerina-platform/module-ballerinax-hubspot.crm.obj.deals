@@ -1,7 +1,15 @@
 ## Overview
-[HubSpot](https://developers.hubspot.com/docs/reference/api) is is an AI-powered customer platform.
 
-The `ballerinax/hubspot.crm.obj.deals` package offers APIs to connect and interact with [HubSpot API](https://developers.hubspot.com/docs/reference/api) endpoints, specifically based on [HubSpot Rest API ](https://developers.hubspot.com/docs/reference/api/overview).
+[HubSpot](https://www.hubspot.com) is an AI-powered customer relationship management (CRM) platform.
+
+The HubSpot CRM Deals connector provides APIs to connect and interact with the [HubSpot Deals API](https://developers.hubspot.com/docs/reference/api/crm/objects/deals) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/overview).
+
+### Key Features
+
+- Create, read, update, and delete deal records in HubSpot CRM
+- List and search deals with filtering support
+- Track deals through sales pipeline stages
+- Manage deal associations and properties
 
 ## Setup guide
 
