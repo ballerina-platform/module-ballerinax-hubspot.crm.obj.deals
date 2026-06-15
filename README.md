@@ -1,8 +1,8 @@
-# Ballerina Ballerina HubSpot CRM Deals Connector connector
+# Ballerina HubSpot CRM Deals connector
 
-[![Build](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/actions/workflows/ci.yml)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-hubspot.crm.object.deals.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/commits/master)
-[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/hubspot.crm.object.deals.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%hubspot.crm.object.deals)
+[![Build](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/actions/workflows/ci.yml)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals.svg)](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/commits/master)
+[![GitHub Issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-library/module/hubspot.crm.obj.deals.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-library/labels/module%2Fhubspot.crm.obj.deals)
 
 ## Overview
 [HubSpot](https://developers.hubspot.com/docs/reference/api) is is an AI-powered customer platform.
@@ -27,20 +27,20 @@ Within app developer accounts, you can [create developer test accounts](https://
 
 1. Go to Test Account section from the left sidebar.
 
-   ![HubSpot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/test_acc_1.png)
+   ![HubSpot developer portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/test_acc_1.png)
 
 2. Click Create developer test account.
 
-   ![HubSpot developer test account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/test_acc_2.png)
+   ![HubSpot developer test account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/test_acc_2.png)
 
 3. In the dialogue box, give a name to your test account and click create.
 
-   ![HubSpot developer test account naming](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/test_acc_3.png)
+   ![HubSpot developer test account naming](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/test_acc_3.png)
 
 ### Step 3: Create a HubSpot App under your account.
 
 1. In your developer account, navigate to the "Apps" section. Click on "Create App"
-   ![HubSpot App creation initial step](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/create_app_1.png)
+   ![HubSpot App creation initial step](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/create_app_1.png)
 
 2. Provide the necessary details, including the app name and description.
 
@@ -48,24 +48,24 @@ Within app developer accounts, you can [create developer test accounts](https://
 
 1. Move to the Auth Tab.
 
-   ![Moving to the Auth tab](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/create_app_2.png)
+   ![Moving to the Auth tab](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/create_app_2.png)
 
 2. In the Scopes section, add the following scopes for your app using the "Add new scope" button.
 
    - `crm.objects.deals.read`
    - `crm.objects.deals.write`
 
-   ![Adding the scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/scope_set.png)
+   ![Adding the scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/scope_set.png)
 
 3. Add your Redirect URI in the relevant section. You can also use localhost addresses for local development purposes. Click Create App.
 
-   ![Adding the redirect URL](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/create_app_final.png)
+   ![Adding the redirect URL](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/create_app_final.png)
 
 ### Step 5: Get your Client ID and Client Secret
 
 - Navigate to the Auth section of your app. Make sure to save the provided Client ID and Client Secret.
 
-   ![Getting credentials from auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/get_credentials.png)
+   ![Getting credentials from auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/get_credentials.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -81,7 +81,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 2. Paste it in the browser and select your developer test account to install the app when prompted.
 
-   ![Installing the App](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/main/docs/resources/install_app.png)
+   ![Installing the App](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/main/docs/resources/install_app.png)
 
 3. After the installation, the authorization code will be displayed in the browser URL. Copy the code.
 
@@ -182,8 +182,8 @@ Utilize the connector's operations to create, update and delete deals etc.
 
 The `ballerinax/hubspot.crm.obj.deals` connector provides practical examples illustrating usage in various scenarios.
 
-1. [Create Manage Deals](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/tree/main/examples/manage-deals) - see how the Hubspot API can be used to create deal and manage it through the sales pipeline.
-2. [Count Deals in stages](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.object.deals/tree/main/examples/count-deals) - see how the Hubspot API can be used to count the number of deals in each stages of sales pipeline.
+1. [Create Manage Deals](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/tree/main/examples/manage-deals) - see how the HubSpot API can be used to create deal and manage it through the sales pipeline.
+2. [Count Deals in stages](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.obj.deals/tree/main/examples/count-deals) - see how the HubSpot API can be used to count the number of deals in each stages of sales pipeline.
 
 ## Build from the source
 
