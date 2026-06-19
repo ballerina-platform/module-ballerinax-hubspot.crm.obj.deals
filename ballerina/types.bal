@@ -19,19 +19,31 @@
 
 import ballerina/http;
 
+# Standard error response structure returned by the Deals API
 public type StandardError record {
+    # Optional sub-category providing further error classification
     record {} subCategory?;
+    # Contextual metadata map with string array values for the error
     record {|string[]...;|} context;
+    # Map of relevant links associated with the error response
     record {|string...;|} links;
+    # Unique identifier for the error instance
     string id?;
+    # High-level category classifying the type of error
     string category;
+    # Human-readable message describing the error
     string message;
+    # List of detailed error entries associated with the failure
     ErrorDetail[] errors;
+    # HTTP status string corresponding to the error response
     string status;
 };
 
+# Paginated collection of associated object IDs for a deal
 public type CollectionResponseAssociatedId record {
+    # Pagination cursors for navigating to the next or previous result page
     Paging paging?;
+    # Array of associated object IDs returned in the response
     AssociatedId[] results;
 };
 
@@ -47,24 +59,37 @@ public type PostCrmV3ObjectsDealsBatchReadReadQueries record {
     boolean archived = false;
 };
 
+# Defines an association target object and its association types
 public type PublicAssociationsForObject record {
+    # List of association type specifications for the target object
     AssociationSpec[] types?;
+    # Contains the unique identifier for a public object
     PublicObjectId to?;
 };
 
+# Batch operation response containing deal results and status
 public type BatchResponseSimplePublicObject record {
+    # Datetime when the batch operation completed
     string completedAt;
+    # Datetime when the batch operation was requested
     string requestedAt?;
+    # Datetime when the batch operation began processing
     string startedAt;
+    # Map of supplemental links related to the batch response
     record {|string...;|} links?;
+    # Array of deal objects returned by the batch operation
     SimplePublicObject[] results;
+    # Current processing status of the batch request
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# A logical grouping of filters applied together when searching deals
 public type FilterGroup record {
+    # Array of filter conditions within this group
     Filter[] filters;
 };
 
+# Detailed information about a specific error encountered during a request
 public type ErrorDetail record {
     # A specific category that contains more specific detail about the error
     string subCategory?;
@@ -78,51 +103,85 @@ public type ErrorDetail record {
     string message;
 };
 
+# Pagination metadata for forward-only cursor-based navigation
 public type ForwardPaging record {
+    # Pagination cursor object containing the token and link needed to retrieve the next page of results
     NextPage next?;
 };
 
+# A minimal object representation containing only a unique identifier
 public type SimplePublicObjectId record {
+    # The unique identifier of the deal object
     string id;
 };
 
+# Batch upsert response containing results, errors, and processing status for deal objects
 public type BatchResponseSimplePublicUpsertObjectWithErrors record {
+    # Timestamp when the batch operation completed
     string completedAt;
+    # Total number of errors encountered during the batch operation
     int:Signed32 numErrors?;
+    # Timestamp when the batch operation was requested
     string requestedAt?;
+    # Timestamp when the batch operation began processing
     string startedAt;
+    # Map of relevant hypermedia links associated with the batch response
     record {|string...;|} links?;
+    # Array of successfully upserted deal objects
     SimplePublicUpsertObject[] results;
+    # Array of errors encountered for individual records in the batch
     StandardError[] errors?;
+    # Current processing status of the batch upsert request
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Input schema for reading a batch of deals by ID with specified properties
 public type BatchReadInputSimplePublicObjectId record {
+    # List of property names to return along with their historical values
     string[] propertiesWithHistory;
+    # The property to use as the identifier for batch lookup
     string idProperty?;
+    # Array of object IDs to retrieve in the batch read
     SimplePublicObjectId[] inputs;
+    # List of property names to include in the response
     string[] properties;
 };
 
+# Batch response containing upserted deal objects with processing status and timing metadata
 public type BatchResponseSimplePublicUpsertObject record {
+    # Datetime when the batch operation completed
     string completedAt;
+    # Datetime when the batch operation was requested
     string requestedAt?;
+    # Datetime when the batch operation began processing
     string startedAt;
+    # Map of related resource links associated with the batch response
     record {|string...;|} links?;
+    # Array of upserted deal objects returned by the batch operation
     SimplePublicUpsertObject[] results;
+    # Current processing status of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# A property value paired with its source metadata and the timestamp of last update
 public type ValueWithTimestamp record {
+    # Identifier of the source that set this value
     string sourceId?;
+    # Type of source that originated this property value
     string sourceType;
+    # Human-readable label describing the value's source
     string sourceLabel?;
+    # ID of the user who last updated this value
     int:Signed32 updatedByUserId?;
+    # The property value stored as a string
     string value;
+    # Datetime when this value was last recorded or updated
     string timestamp;
 };
 
+# Batch input containing an array of deal object IDs for bulk operations
 public type BatchInputSimplePublicObjectId record {
+    # Array of deal object IDs to process in the batch operation
     SimplePublicObjectId[] inputs;
 };
 
@@ -133,30 +192,44 @@ public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl = "https://api.hubapi.com/oauth/v1/token";
 |};
 
+# Batch input containing an array of deal objects for bulk upsert operations
 public type BatchInputSimplePublicObjectBatchInputUpsert record {
+    # Array of deal objects to upsert in a single batch operation
     SimplePublicObjectBatchInputUpsert[] inputs;
 };
 
+# A paginated collection of deal objects with a total count and forward paging cursor
 public type CollectionResponseWithTotalSimplePublicObjectForwardPaging record {
+    # Total number of deals matching the request
     int:Signed32 total;
+    # Pagination metadata for forward-only cursor-based navigation
     ForwardPaging paging?;
+    # Array of deal objects returned in the current page
     SimplePublicObject[] results;
 };
 
+# Represents a single deal object with its properties, metadata, and history
 public type SimplePublicObject record {
+    # Timestamp when the deal was created
     string createdAt;
+    # Indicates whether the deal is archived
     boolean archived?;
+    # Timestamp when the deal was archived
     string archivedAt?;
+    # Map of deal property names to their historical values with timestamps
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
+    # Unique identifier of the deal
     string id;
+    # Map of deal property names to their current values
     record {|string?...;|} properties;
+    # Timestamp when the deal was last updated
     string updatedAt;
 };
 
-# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint.
+# Provides a set of configurations for controlling the behaviours when communicating with a remote HTTP endpoint
 @display {label: "Connection Config"}
 public type ConnectionConfig record {|
-    # Provides Auth configurations needed when communicating with a remote HTTP endpoint.
+    # Provides Auth configurations needed when communicating with a remote HTTP endpoint
     http:BearerTokenConfig|OAuth2RefreshTokenGrantConfig|ApiKeysConfig auth;
     # The HTTP version understood by the client
     http:HttpVersion httpVersion = http:HTTP_2_0;
@@ -193,114 +266,187 @@ public type ConnectionConfig record {|
     # Enables the inbound payload validation functionality which provided by the constraint package. Enabled by default
     boolean validation = true;
     # Enables relaxed data binding on the client side. When enabled, `nil` values are treated as optional, 
-    # and absent fields are handled as `nilable` types. Enabled by default.
+    # and absent fields are handled as `nilable` types. Enabled by default
     boolean laxDataBinding = true;
 |};
 
+# Contains the unique identifier for a public object
 public type PublicObjectId record {
+    # Unique identifier of the object
     string id?;
 };
 
+# Pagination cursors for navigating to the next or previous result page
 public type Paging record {
+    # Pagination cursor object containing the token and link needed to retrieve the next page of results
     NextPage next?;
+    # Cursor reference for navigating to the previous page of paginated results
     PreviousPage prev?;
 };
 
+# Request payload for searching deals using filters, sorting, and pagination
 public type PublicObjectSearchRequest record {
+    # Full-text search query string to filter deals
     string query?;
+    # Maximum number of results to return per page
     int:Signed32 'limit?;
+    # Cursor token for retrieving the next page of results
     string after?;
+    # List of property names to sort results by
     string[] sorts?;
+    # List of deal properties to include in the response
     string[] properties?;
+    # Groups of filters used to narrow search results
     FilterGroup[] filterGroups?;
 };
 
+# Input object for upserting a deal in a batch operation, requiring an ID and property map
 public type SimplePublicObjectBatchInputUpsert record {
+    # Name of the property used as the unique identifier
     string idProperty?;
+    # Trace ID for tracking the object write operation
     string objectWriteTraceId?;
+    # Unique identifier of the deal to upsert
     string id;
+    # Map of deal property names to their updated values
     record {|string...;|} properties;
 };
 
+# Batch operation response containing deal results, processing status, timestamps, and any errors encountered
 public type BatchResponseSimplePublicObjectWithErrors record {
+    # Timestamp when the batch operation completed
     string completedAt;
+    # Total number of errors encountered in the batch
     int:Signed32 numErrors?;
+    # Timestamp when the batch operation was requested
     string requestedAt?;
+    # Timestamp when the batch operation began processing
     string startedAt;
+    # Map of relevant link names to their associated URLs
     record {|string...;|} links?;
+    # List of successfully processed deal objects
     SimplePublicObject[] results;
+    # List of errors from individual failed batch items
     StandardError[] errors?;
+    # Current processing status of the batch operation
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Input payload for creating or updating a deal object with its properties
 public type SimplePublicObjectInput record {
+    # Trace identifier for tracking the write operation
     string objectWriteTraceId?;
+    # Key-value map of deal property names and their string values
     record {|string...;|} properties;
 };
 
+# Paginated collection of deal objects including their associations
 public type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging record {
+    # Pagination metadata for forward-only cursor-based navigation
     ForwardPaging paging?;
+    # Array of deal objects returned in the current page of results
     SimplePublicObjectWithAssociations[] results;
 };
 
+# Input payload specifying the two deal records to merge
 public type PublicMergeInput record {
+    # ID of the secondary deal to be merged into the primary
     string objectIdToMerge;
+    # ID of the primary deal that will be retained after the merge
     string primaryObjectId;
 };
 
+# Defines the category and type of an association between objects
 public type AssociationSpec record {
+    # Category of the association: HubSpot-defined, user-defined, or integrator-defined
     "HUBSPOT_DEFINED"|"USER_DEFINED"|"INTEGRATOR_DEFINED" associationCategory?;
+    # Numeric identifier for the specific association type
     int:Signed32 associationTypeId?;
 };
 
+# A deal object including its properties, metadata, and associated records
 public type SimplePublicObjectWithAssociations record {
+    # Map of associated object collections keyed by association type
     record {|CollectionResponseAssociatedId...;|} associations?;
+    # Timestamp indicating when the deal record was created
     string createdAt;
+    # Indicates whether the deal record is archived
     boolean archived?;
+    # Timestamp indicating when the deal record was archived
     string archivedAt?;
+    # Map of deal properties with their full historical value changes
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
+    # Unique identifier of the deal record
     string id;
+    # Map of deal property names to their current string values
     record {|string?...;|} properties;
+    # Timestamp of the last update to the deal record
     string updatedAt;
 };
 
+# Defines a single filter condition used to query deals by property value and comparison operator
 public type Filter record {
+    # Upper bound value for BETWEEN range filter operations
     string highValue?;
+    # The deal property name to evaluate in the filter condition
     string propertyName;
+    # List of values for IN or NOT_IN filter operations
     string[] values?;
+    # The single value to compare against the specified property
     string value?;
-    # null
+    # Comparison operator applied to the property and value in the filter
     "EQ"|"NEQ"|"LT"|"LTE"|"GT"|"GTE"|"BETWEEN"|"IN"|"NOT_IN"|"HAS_PROPERTY"|"NOT_HAS_PROPERTY"|"CONTAINS_TOKEN"|"NOT_CONTAINS_TOKEN" operator;
 };
 
+# Cursor reference for navigating to the previous page of paginated results
 public type PreviousPage record {
+    # Cursor value representing the start of the previous page
     string before;
+    # URL link to retrieve the previous page of results
     string link?;
 };
 
+# Wraps an array of deal inputs for batch create operations
 public type BatchInputSimplePublicObjectInputForCreate record {
+    # Array of deal objects to create in a single batch request
     SimplePublicObjectInputForCreate[] inputs;
 };
 
+# Wraps an array of deal update inputs for batch update operations
 public type BatchInputSimplePublicObjectBatchInput record {
+    # Array of deal objects to update in a single batch request
     SimplePublicObjectBatchInput[] inputs;
 };
 
+# Represents a deal record returned from an upsert operation, indicating whether it was newly created
 public type SimplePublicUpsertObject record {
+    # Timestamp when the deal record was originally created
     string createdAt;
+    # Indicates whether the deal record is archived
     boolean archived?;
+    # Timestamp when the deal record was archived
     string archivedAt?;
+    # Indicates whether the record was created (true) or updated (false) by the upsert
     boolean 'new;
+    # Map of property names to their historical values with timestamps
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
+    # Unique identifier of the upserted deal object
     string id;
+    # Key-value map of deal property names to their values
     record {|string...;|} properties;
+    # Timestamp when the deal object was last updated
     string updatedAt;
 };
 
+# Input schema for updating an existing deal in a batch operation, including its identifier and property values
 public type SimplePublicObjectBatchInput record {
+    # Name of a unique property to use as the record identifier instead of the default deal ID
     string idProperty?;
+    # Trace identifier for debugging and tracking the write operation
     string objectWriteTraceId?;
+    # Unique identifier of the deal to update
     string id;
+    # Key-value map of deal property names to their updated values
     record {|string...;|} properties;
 };
 
@@ -318,25 +464,35 @@ public type GetCrmV3ObjectsDealsDealIdGetByIdQueries record {
     string[] properties?;
 };
 
+# Pagination cursor object containing the token and link needed to retrieve the next page of results
 public type NextPage record {
+    # Relative URL to fetch the next page of results
     string link?;
+    # Cursor token used to retrieve the next page of results
     string after;
 };
 
+# Represents an associated object's identifier and association type for a deal relationship
 public type AssociatedId record {
+    # Unique identifier of the associated object
     string id;
+    # Type defining the nature of the association relationship
     string 'type;
 };
 
-# Provides API key configurations needed when communicating with a remote HTTP endpoint.
+# Provides API key configurations needed when communicating with a remote HTTP endpoint
 public type ApiKeysConfig record {|
     string privateAppLegacy;
     string privateApp;
 |};
 
+# Input schema for creating a new deal, including its property values and optional associations to other CRM objects
 public type SimplePublicObjectInputForCreate record {
+    # List of associations linking this deal to other CRM objects at creation time
     PublicAssociationsForObject[] associations?;
+    # Trace identifier for debugging and tracking the write operation
     string objectWriteTraceId?;
+    # Key-value map of deal property names to their values
     record {|string...;|} properties;
 };
 
